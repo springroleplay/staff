@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>فرم درخواست تیم استف - Spring Roleplay</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vazirmatn@latest/font-face.css">
+  <style>
+    :root {
+      --primary: #FFD700;
+      --primary-dark: #FFC000;
+      --dark: #1A1A1A;
+      --darker: #121212;
+      --light: #F5F5F5;
+      --gray: #444;
+      --light-gray: #666;
+      --success: #4CAF50;
+      --error: #F44336;
+      --radius: 12px;
+      --shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Vazirmatn, Tahoma, sans-serif;
+      background: linear-gradient(135deg, #1e1e2f 0%, #121218 100%);
+      color: var(--light);
+      min-height: 100vh;
+      padding: 2rem;
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .form-box {
+      background: rgba(30, 30, 30, 0.8);
+      backdrop-filter: blur(10px);
+      border-radius: var(--radius);
+      padding: 2.5rem;
+      box-shadow: var(--shadow);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      transition: var(--transition);
+    }
+
+    .form-box:hover {
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+    }
+
+    .header {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+
+    .logo {
+      width: 60px;
+      height: 60px;
+      background: linear-gradient(135deg, rgba(255, 215, 0, 0.1) 0%, rgba(255, 215, 0, 0.2) 100%);
+      border: 2px solid var(--primary);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8rem;
+      color: var(--primary);
+      box-shadow: 0 0 20px rgba(255, 215, 0, 0.2);
+    }
+
+    h2 {
+      color: var(--primary);
+      font-size: 1.8rem;
+      margin-bottom: 1.5rem;
+      position: relative;
+      display: inline-block;
+    }
+
+    h2::after {
+      content: '';
+      position: absolute;
+      bottom: -8px;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(90deg, var(--primary), transparent);
+      border-radius: 3px;
+    }
+
+    .row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    @media (max-width: 768px) {
+      .row {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+      color: var(--primary);
+      font-size: 1rem;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 0.8rem 1rem;
+      border-radius: var(--radius);
+      border: 1px solid var(--gray);
+      background: rgba(20, 20, 20, 0.7);
+      color: var(--light);
+      font-family: inherit;
+      font-size: 1rem;
+      transition: var(--transition);
+    }
+
+    input:focus, select:focus, textarea:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 2px rgba(255, 215, 0, 0.2);
+    }
+
+    textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+
+    .required::after {
+      content: " *";
+      color: var(--error);
+    }
+
+    button[type="submit"] {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      color: #000;
+      font-weight: 700;
+      padding: 1rem;
+      border: none;
+      border-radius: var(--radius);
+      cursor: pointer;
+      width: 100%;
+      margin-top: 1.5rem;
+      font-size: 1.1rem;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
+    }
+
+    button[type="submit"]:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(255, 215, 0, 0.4);
+    }
+
+    button[type="submit"]:disabled {
+      background: var(--gray);
+      color: var(--light-gray);
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+
+    .footer {
+      text-align: center;
+      margin-top: 2rem;
+      color: var(--light-gray);
+      font-size: 0.9rem;
+    }
+
+    .footer a {
+      color: var(--primary);
+      text-decoration: none;
+      transition: var(--transition);
+    }
+
+    .footer a:hover {
+      text-decoration: underline;
+    }
+
+    /* انیمیشن ها */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .form-box {
+      animation: fadeIn 0.6s ease-out forwards;
+    }
+
+    .form-group {
+      animation: fadeIn 0.4s ease-out forwards;
+    }
+
+    .form-group:nth-child(1) { animation-delay: 0.1s; }
+    .form-group:nth-child(2) { animation-delay: 0.2s; }
+    .form-group:nth-child(3) { animation-delay: 0.3s; }
+    .form-group:nth-child(4) { animation-delay: 0.4s; }
+    .form-group:nth-child(5) { animation-delay: 0.5s; }
+    .form-group:nth-child(6) { animation-delay: 0.6s; }
+    .form-group:nth-child(7) { animation-delay: 0.7s; }
+
+    /* اسکرول بار سفارشی */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: var(--darker);
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: var(--primary);
+      border-radius: 4px;
+    }
+
+    /* افکت های ویژه */
+    .glow {
+      text-shadow: 0 0 10px rgba(255, 215, 0, 0.7);
+    }
+    
+    .info-text {
+      font-size: 0.85rem;
+      color: var(--light-gray);
+      margin-top: 0.3rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="form-box">
+      <div class="header">
+        <div class="logo">👨‍💼</div>
+        <h1 class="glow">Spring Roleplay</h1>
+        <h2>📋 فرم درخواست تیم استف</h2>
+      </div>
+
+      <form id="staffForm">
+        <div class="form-group">
+          <label for="fullname" class="required">نام شما</label>
+          <input id="fullname" name="fullname" type="text" placeholder="نام کامل خود را وارد کنید" required>
+        </div>
+
+        <div class="form-group">
+          <label for="steamname" class="required">اسم استیم شما (Steam Name)</label>
+          <input id="steamname" name="steamname" type="text" placeholder="نام اکانت استیم خود را وارد کنید" required>
+        </div>
+
+        <div class="form-group">
+          <label for="age" class="required">سن شما</label>
+          <input id="age" name="age" type="number" min="10" max="80" placeholder="سن خود را وارد کنید" required>
+        </div>
+
+        <div class="form-group">
+          <label for="playtime" class="required">تایم پلی شما در روز</label>
+          <input id="playtime" name="playtime" type="text" placeholder="مثال: 4-5 ساعت" required>
+        </div>
+
+        <div class="form-group">
+          <label for="experience" class="required">سابقه شما در تیم استف (اسم سرور رو بنویسید)</label>
+          <textarea id="experience" name="experience" placeholder="سابقه خود در تیم استف سرورهای دیگر را بنویسید. اگر سابقه ندارید، 'ندارم' بنویسید." required></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="phone" class="required">شماره تلفن شما (OOC)</label>
+          <input id="phone" name="phone" type="text" placeholder="شماره تلفن برای ارتباط ضروری" required>
+        </div>
+
+        <div class="form-group">
+          <label for="knowledge" class="required">درصد تسلط شما به قوانین</label>
+          <select id="knowledge" name="knowledge" required>
+            <option value="">انتخاب کنید…</option>
+            <option value="20%">20%</option>
+            <option value="50%">50%</option>
+            <option value="70%">70%</option>
+            <option value="100%">100%</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="steamhex" class="required">Steam HEX</label>
+          <input id="steamhex" name="steamhex" type="text" placeholder="استیم هگز خود را وارد کنید" required>
+          <p class="info-text">از طریق سایت <a href="https://steamid.pro/" target="_blank" style="color: var(--primary);">https://steamid.pro/</a> استیم هگز خود را پیدا کنید</p>
+        </div>
+
+        <button type="submit" id="submitBtn">
+          <span id="submitText">ارسال فرم</span>
+          <span id="submitIcon">✅</span>
+        </button>
+        
+        <div class="footer">
+          لینک دیسکورد: <a href="https://discord.gg/aZAQ2xef" target="_blank">https://discord.gg/aZAQ2xef</a>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    const form = document.getElementById('staffForm');
+    const submitBtn = document.getElementById('submitBtn');
+    const submitText = document.getElementById('submitText');
+    const submitIcon = document.getElementById('submitIcon');
+    const KEY = 'spring_rp_staff_form';
+    const DISCORD_WEBHOOK = 'https://discord.com/api/webhooks/1406691072943460442/zzplKfFdbO37oZQstGq2LaSnASJgvdxgw73Wa70kRM3DzWiyG7WlmSw4oJrtnnH37tfQ';
+    let isSubmitting = false;
+
+    // بارگذاری داده‌های ذخیره شده
+    window.addEventListener('DOMContentLoaded', () => {
+      const saved = localStorage.getItem(KEY);
+      if (saved) {
+        const data = JSON.parse(saved);
+        Object.keys(data).forEach(k => {
+          if (form.elements[k]) {
+            form.elements[k].value = data[k];
+          }
+        });
+      }
+    });
+
+    // ذخیره موقت داده‌ها
+    form.addEventListener('input', () => {
+      const data = {};
+      Array.from(form.elements).forEach(el => {
+        if (el.name && el.type !== 'submit') {
+          data[el.name] = el.value;
+        }
+      });
+      localStorage.setItem(KEY, JSON.stringify(data));
+    });
+
+    // ارسال فرم
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      
+      if (isSubmitting) return;
+      isSubmitting = true;
+      submitBtn.disabled = true;
+      submitText.textContent = 'در حال ارسال...';
+      submitIcon.textContent = '⏳';
+
+      try {
+        const data = {};
+        Array.from(form.elements).forEach(el => {
+          if (el.name && el.type !== 'submit') {
+            data[el.name] = el.value;
+          }
+        });
+
+        // ساخت پیام دیسکورد
+        const content = `
+**نام متقاضی:** ${data.fullname}
+**نام استیم:** ${data.steamname}
+**سن:** ${data.age}
+**تایم پلی روزانه:** ${data.playtime}
+**سابقه استفی:** ${data.experience}
+**شماره تلفن:** ${data.phone}
+**تسلط به قوانین:** ${data.knowledge}
+**Steam HEX:** ${data.steamhex}
+        `;
+
+        // ارسال به دیسکورد
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 10000);
+
+        const response = await fetch(DISCORD_WEBHOOK, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ content }),
+          signal: controller.signal
+        });
+
+        clearTimeout(timeoutId);
+
+        if (!response.ok) throw new Error('خطا در ارسال');
+
+        // نمایش پیام موفقیت با استایل زیبا
+        submitText.textContent = 'ارسال موفق!';
+        submitIcon.textContent = '🎉';
+        
+        setTimeout(() => {
+          alert('✅ درخواست شما با موفقیت ارسال شد!');
+          form.reset();
+          localStorage.removeItem(KEY);
+          submitText.textContent = 'ارسال فرم';
+          submitIcon.textContent = '✅';
+        }, 1000);
+
+      } catch (err) {
+        console.error('خطا در ارسال فرم:', err);
+        submitText.textContent = 'خطا در ارسال';
+        submitIcon.textContent = '❌';
+        
+        setTimeout(() => {
+          alert('⚠️ خطا در ارسال فرم. لطفاً اتصال اینترنت خود را بررسی کنید و دوباره تلاش کنید.');
+          submitText.textContent = 'ارسال فرم';
+          submitIcon.textContent = '✅';
+        }, 1000);
+        
+      } finally {
+        setTimeout(() => {
+          isSubmitting = false;
+          submitBtn.disabled = false;
+        }, 1500);
+      }
+    });
+  </script>
+</body>
+</html>
